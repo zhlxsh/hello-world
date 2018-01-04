@@ -1,0 +1,107 @@
+'''斐波那契数列专题  使用现在学习的各种方法'''
+
+```
+# 数组实现
+my_list = [1, 1]
+for i in range(2, 10):
+    my_list.append(my_list[i-2]+my_list[i-1])
+print('数组   ', my_list)
+
+# 交换变量
+a = b = 1
+for i in range(10-2):
+    a, b = b, a+b
+print('交换变量 ', b)
+
+# 递归与尾递归
+def fbi(n):
+    if n < 3:
+        return 1
+    else:
+        return fbi(n-2)+fbi(n-1)
+
+
+def xfbi(n, i, j):
+    if n < 3:
+        return j
+    else:
+        return xfbi(n-1, j, i+j)
+
+
+print('递归   ', fbi(10))
+print('尾递归  ', xfbi(10, 1, 1))
+
+
+# 迭代器
+
+
+class MylistIter(object):
+    def __init__(self, n):
+        self.n = n
+        self.i = 1
+        self.j = 1
+
+    def __next__(self):
+        if self.n > 0:
+            v = self.i
+            self.i, self.j = self.j, self.i + self.j
+            self.n -= 1
+            return v
+        else:
+            raise StopIteration
+
+    def __iter__(self):
+        return self
+
+
+class Mylist(object):
+
+    def __init__(self, n):
+        self.n = n
+
+    def __iter__(self):
+        return MylistIter(self.n)
+
+
+for i in Mylist(10):
+    pass
+
+print('迭代器1   ', i)
+
+
+
+class MylistIter2(object):
+    def __init__(self):
+        self.i = 1
+        self.j = 1
+
+    def __next__(self):
+        v = self.i
+        self.i, self.j = self.j, self.i + self.j
+        return v
+
+    def __iter__(self):
+        return self
+
+
+i = 0
+myiter = MylistIter2()
+while i < 10:
+    a = next(myiter)
+    i += 1
+
+print('迭代器2  ', a)
+
+# 生成器
+def fun():
+    i,j = 1, 1
+    for n in range(100):
+        yield i
+        i, j = j, j+i
+
+f = fun()
+for i in range(10):
+    b = next(f)
+
+print('生成器  ', b)
+```
