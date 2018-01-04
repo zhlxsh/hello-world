@@ -1,0 +1,28 @@
+# 斐波那契数列之递归与尾递归实现
+# 1,1,2,3,5,8,13,21 从第三个数开始每个数都是前两个数的和。
+
+>def fun_1(n):
+    if n < 3:
+        return 1
+    else:
+        # 从头往尾递归 会产生像二叉树一样指数展开
+        return fun_1(n-2)+fun_1(n-1)
+
+
+>def fun(n, i, j):
+    if n < 3:
+        return j
+    else:
+        # 尾递归 递归次数为线性
+        # print(n, i, j)
+        return fun(n-1, j, j+i)
+
+
+>if __name__ == '__main__':
+    n = int(input('请输入要的斐波那契数列n(33以上可以看到明显效果)：    '))
+
+    print('This is fun')
+    print(fun(n, 1, 1))
+
+    print('This is fun_1')
+    print(fun_1(n))
