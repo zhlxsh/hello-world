@@ -1,0 +1,11 @@
+# 初始化git仓库
+git init
+# 设置用户名和邮箱
+git config user.name 'zhlxsh'
+git config user.email 'zhzhn619@gmail.com'
+# 查看用户名和邮箱
+git config user.name
+git config user.email
+
+
+
